@@ -13,7 +13,8 @@ import butterknife.BindView;
 
 public class MainActivity extends MvpActivity<LoginPresenter> implements LoginContract.View {
 
-    @BindView(R.id.name) TextView name;
+    @BindView(R.id.name)
+    TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +23,6 @@ public class MainActivity extends MvpActivity<LoginPresenter> implements LoginCo
         mPresenter.checkParameter();
     }
 
-    @Override
-    public String getAccount() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
 
     @Override
     public void loginSuccess() {

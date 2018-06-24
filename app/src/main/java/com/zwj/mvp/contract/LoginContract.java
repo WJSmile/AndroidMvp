@@ -2,7 +2,11 @@ package com.zwj.mvp.contract;
 
 
 import com.zwj.mvp.lib.base.BaseView;
+import com.zwj.mvp.lib.http.TestBase;
 import com.zwj.mvp.lib.mvp.MvpModel;
+import com.zwj.mvp.presenter.LoginPresenter;
+
+import io.reactivex.Observable;
 
 /**
  * Created by wulei
@@ -10,13 +14,12 @@ import com.zwj.mvp.lib.mvp.MvpModel;
  */
 public class LoginContract {
     public interface View extends BaseView {
-        String getAccount();
-        String getPassword();
         void loginSuccess();
         void loginError(String errorMsg);
     }
 
     public interface Model extends MvpModel {
-        String  login();
+        Observable<TestBase> login();
     }
+
 }

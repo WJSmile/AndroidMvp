@@ -5,6 +5,10 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.zwj.mvp.lib.mvp.Mvp;
 
 
@@ -21,12 +25,17 @@ public class MyApplication extends Application {
             return myApplication;
         }
     }
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         Mvp.getInstance().init(this);
         myApplication = this;
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
+
+
     public static boolean isNetworkAvalible(Context context) {
         // 获得网络状态管理器
         ConnectivityManager connectivityManager = (ConnectivityManager) context

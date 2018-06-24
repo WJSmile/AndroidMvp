@@ -1,46 +1,40 @@
 package com.zwj.mvp.presenter;
 
-import android.text.TextUtils;
-
-import com.zwj.mvp.R;
+import com.orhanobut.logger.Logger;
 import com.zwj.mvp.contract.LoginContract;
+import com.zwj.mvp.lib.http.TestBase;
 import com.zwj.mvp.lib.mvp.MvpPresenter;
 import com.zwj.mvp.model.LoginModel;
 
 
-/**
- * Created by wulei
- * Data: 2016/3/30.
- */
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
+
 public class LoginPresenter extends MvpPresenter<LoginModel, LoginContract.View> {
-    private static final String TAG = "LoginPresenter";
 
-    /**
-     * 登录参数校验
-     *
-     * @return
-     */
-    public boolean checkParameter() {
-        getIView().loginError(mModel.login());
-        String account = getIView().getAccount();
-        String password = getIView().getPassword();
+    public void checkParameter() {
+        mModel.login().subscribe(new Observer<TestBase>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-        //模拟登陆成功
-        getIView().loginSuccess();
-
-        try {
-            if (TextUtils.isEmpty(getIView().getAccount())) {
-                getIView().loginError(mContext.getString(R.string.toast_account_empty));
-                return false;
             }
 
-            if (TextUtils.isEmpty(getIView().getPassword())) {
-                getIView().loginError(mContext.getString(R.string.toast_password_empty));
-                return false;
+            @Override
+            public void onNext(TestBase testBase) {
+                mModel.login();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
+
+            @Override
+            public void onError(Throwable e) {
+                Logger.d(e.getMessage()+"hello");
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
+
 }
