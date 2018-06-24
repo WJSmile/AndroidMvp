@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidMvp</string>
+
+    <string name="login_success">登录成功</string>
+    <string name="toast_account_empty">账号不能为空</string>
+    <string name="toast_password_empty">密码不能为空</string>
+</resources>
